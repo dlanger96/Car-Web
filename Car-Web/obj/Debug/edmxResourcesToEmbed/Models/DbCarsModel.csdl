@@ -12,9 +12,9 @@
     <Property Name="Production_Year" Type="Int32" />
     <Property Name="Quantity" Type="Int32" />
     <NavigationProperty Name="Fuel1" Relationship="Self.FK_Cars_Fuel" FromRole="Cars" ToRole="Fuel" />
-    <NavigationProperty Name="Make1" Relationship="Self.FK_Cars_Make" FromRole="Cars" ToRole="Make" />
     <NavigationProperty Name="Model1" Relationship="Self.FK_Cars_Model" FromRole="Cars" ToRole="Model" />
     <Property Name="Sir" Type="Int32" />
+    <NavigationProperty Name="Make11" Relationship="DbCarsModel.FK_Car_Make" FromRole="Car" ToRole="Make" />
   </EntityType>
   <EntityType Name="Fuel">
     <Key>
@@ -31,7 +31,7 @@
     <Property Name="Id_Make" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Car" Relationship="Self.FK_Cars_Make" FromRole="Make" ToRole="Cars" />
+    <NavigationProperty Name="Cars" Relationship="DbCarsModel.FK_Car_Make" FromRole="Make" ToRole="Car" />
   </EntityType>
   <EntityType Name="Model">
     <Key>
@@ -65,18 +65,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Cars_Make">
-    <End Role="Make" Type="Self.Make" Multiplicity="1" />
-    <End Role="Cars" Type="Self.Car" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Make">
-        <PropertyRef Name="Id_Make" />
-      </Principal>
-      <Dependent Role="Cars">
-        <PropertyRef Name="Id_Car" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Cars_Model">
     <End Role="Model" Type="Self.Model" Multiplicity="1" />
     <End Role="Cars" Type="Self.Car" Multiplicity="*" />
@@ -99,13 +87,25 @@
       <End Role="Fuel" EntitySet="Fuels" />
       <End Role="Cars" EntitySet="Cars" />
     </AssociationSet>
-    <AssociationSet Name="FK_Cars_Make" Association="Self.FK_Cars_Make">
-      <End Role="Make" EntitySet="Makes" />
-      <End Role="Cars" EntitySet="Cars" />
-    </AssociationSet>
     <AssociationSet Name="FK_Cars_Model" Association="Self.FK_Cars_Model">
       <End Role="Model" EntitySet="Models" />
       <End Role="Cars" EntitySet="Cars" />
     </AssociationSet>
+    <AssociationSet Name="FK_Car_Make" Association="DbCarsModel.FK_Car_Make">
+      <End Role="Make" EntitySet="Makes" />
+      <End Role="Car" EntitySet="Cars" />
+    </AssociationSet>
   </EntityContainer>
+  <Association Name="FK_Car_Make">
+    <End Type="DbCarsModel.Make" Role="Make" Multiplicity="1" />
+    <End Type="DbCarsModel.Car" Role="Car" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Make">
+        <PropertyRef Name="Id_Make" />
+      </Principal>
+      <Dependent Role="Car">
+        <PropertyRef Name="Make" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

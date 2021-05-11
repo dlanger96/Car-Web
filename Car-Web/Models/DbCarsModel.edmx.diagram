@@ -7,12 +7,12 @@
       <Diagram DiagramId="3ba313c49e22481788498a8acc638eee" Name="Diagram1">
         <EntityTypeShape EntityType="DbCarsModel.Car" Width="1.5" PointX="4" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="DbCarsModel.Fuel" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="DbCarsModel.Make" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbCarsModel.Make" Width="1.5" PointX="1" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DbCarsModel.Model" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="DbCarsModel.sysdiagram" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
         <AssociationConnector Association="DbCarsModel.FK_Cars_Fuel" ManuallyRouted="false" />
-        <AssociationConnector Association="DbCarsModel.FK_Cars_Make" ManuallyRouted="false" />
         <AssociationConnector Association="DbCarsModel.FK_Cars_Model" ManuallyRouted="false" />
+        <AssociationConnector Association="DbCarsModel.FK_Car_Make" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

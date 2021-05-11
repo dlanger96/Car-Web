@@ -15,14 +15,14 @@ namespace Car_Web.Controllers.Api
         public IHttpActionResult GetAllCars()
         {
             List<CarsModel> listOfCars = new List<CarsModel>();
-            CarsModel carsModel = new CarsModel();
+            
             List<Car> listCar = new List<Car>();
-            CarsModel modelOfCar = new CarsModel();
             using (CarsEntities entities = new CarsEntities())
             {
                 listCar = new List<Car>(entities.Cars.ToList());
                 foreach (var item in listCar)
                 {
+                    CarsModel carsModel = new CarsModel();
                     carsModel.Id_Car = item.Id_Car;
                     carsModel.Fuel = entities.Fuels.Where(c => item.Fuel == c.Id_Fuel).Select(c => c.Name).FirstOrDefault().ToString();
                     carsModel.Make = entities.Makes.Where(c => c.Id_Make == item.Make).Select(c => c.Name).FirstOrDefault().ToString();
@@ -30,8 +30,9 @@ namespace Car_Web.Controllers.Api
                     carsModel.Power = item.Power;
                     carsModel.ProductionYear = int.Parse(item.Production_Year.ToString());
                     carsModel.Quantity = int.Parse(item.Quantity.ToString());
+                    listOfCars.Add(carsModel);
                 }
-                listOfCars.Add(carsModel);
+               
                 
                 
             }

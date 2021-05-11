@@ -24,7 +24,7 @@ namespace Car_Web.Models
         public Nullable<int> Sir { get; set; }
     
         public virtual Fuel Fuel1 { get; set; }
-        public virtual Make Make1 { get; set; }
         public virtual Model Model1 { get; set; }
+        public virtual Make Make11 { get; set; }
     }
 }

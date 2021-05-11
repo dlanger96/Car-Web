@@ -47,6 +47,18 @@
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
+  <Association Name="FK_Car_Make">
+    <End Role="Make" Type="Self.Make" Multiplicity="1" />
+    <End Role="Cars" Type="Self.Cars" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Make">
+        <PropertyRef Name="Id_Make" />
+      </Principal>
+      <Dependent Role="Cars">
+        <PropertyRef Name="Make" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Cars_Fuel">
     <End Role="Fuel" Type="Self.Fuel" Multiplicity="1" />
     <End Role="Cars" Type="Self.Cars" Multiplicity="*" />
@@ -56,18 +68,6 @@
       </Principal>
       <Dependent Role="Cars">
         <PropertyRef Name="Fuel" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Cars_Make">
-    <End Role="Make" Type="Self.Make" Multiplicity="1" />
-    <End Role="Cars" Type="Self.Cars" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Make">
-        <PropertyRef Name="Id_Make" />
-      </Principal>
-      <Dependent Role="Cars">
-        <PropertyRef Name="Id_Car" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -89,12 +89,12 @@
     <EntitySet Name="Make" EntityType="Self.Make" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Model" EntityType="Self.Model" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_Cars_Fuel" Association="Self.FK_Cars_Fuel">
-      <End Role="Fuel" EntitySet="Fuel" />
+    <AssociationSet Name="FK_Car_Make" Association="Self.FK_Car_Make">
+      <End Role="Make" EntitySet="Make" />
       <End Role="Cars" EntitySet="Cars" />
     </AssociationSet>
-    <AssociationSet Name="FK_Cars_Make" Association="Self.FK_Cars_Make">
-      <End Role="Make" EntitySet="Make" />
+    <AssociationSet Name="FK_Cars_Fuel" Association="Self.FK_Cars_Fuel">
+      <End Role="Fuel" EntitySet="Fuel" />
       <End Role="Cars" EntitySet="Cars" />
     </AssociationSet>
     <AssociationSet Name="FK_Cars_Model" Association="Self.FK_Cars_Model">

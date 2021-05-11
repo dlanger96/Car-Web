@@ -14,10 +14,17 @@ namespace Car_Web.Models
     
     public partial class Make
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Make()
+        {
+            this.Cars = new HashSet<Car>();
+        }
+    
         public int Id_Make { get; set; }
         public string Name { get; set; }
         public string Country { get; set; }
     
-        public virtual Car Car { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Car> Cars { get; set; }
     }
 }
