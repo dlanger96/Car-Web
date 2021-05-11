@@ -8,13 +8,10 @@
     }
     h2{
         margin: 0px;
-        padding-top: 10px;
-        text-align: center;
-
     }
     .card-contianer {
-        width: 45%;
-        height: 50%;
+        width: 15%;
+        height: 40%;
         background: #FFF;
         border-radius: 6px;
         position: absolute;
@@ -27,9 +24,7 @@
     }
     .upper-container{
         height: 20%;
-        background: #084dba;
-        border-bottom-left-radius: 50%;
-        border-bottom-right-radius: 50%;
+        background: #ff0000;
 
     }
     .lower-container{
@@ -52,22 +47,8 @@
             <h2>Cars</h2>
         </div>
         <div class="lower-container">
-            <input type="text" id="txt-Make" />
-            <input type="text" id="txt-Model" />
-            <input type="text" id="txt-Year" />
-            <input type="text" id="txt-Power" />
-            <input type="text" id="txt-Quantity" />
-            <input type="text" id="txt-Fuel" />
+            <input type="text" id="txt-Car" />
             <input type="button" id="btn-Car" value="Send" />
-
-            <table class="table table-striped" id="car-table">
-                <thead>
-
-                </thead>
-                <tbody>
-
-                </tbody>
-            </table>
         </div>
 
     </div>
@@ -89,28 +70,8 @@
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     success: function (msg) {
-
-                        $("#car-table thead").append("<tr> <th>Id</th> <th>Make</th> <th>Model</th> <th>Fuel</th> <th>Power</th> <th>Production Year</th> <th>Quantity</th> </tr>")
-                        var data = msg;
-
-                        //data.forEach(carsData);
-
-                        for (var i = 0; i < msg.length; i++) {
-                            $("#car-table tbody").append('<tr> <td>' + msg[i].Id_Car + '</td> <td>' + msg[i].Make +'</td> <td>' + msg[i].Model + '</td> <td>' + msg[i].Fuel + '</td> <td>' + msg[i].Power + '</td> <td>' + msg[i].ProductionYear + '</td> <td>' + msg[i].Quantity +'</td> </tr>');
-                        }
-
-                        //function carsData(item, index) {
-                        //    var addDataTable = '<tr> <td>' + index + '</td> <td>' + item[index].Model + '</td> <td>' + item[index].Fuel + '</td> <td>' + item[index].Power + '</td> <td>' + item[index].ProductionYear + '</td> <td>' + item[index].Quantity +'</td> </tr>';
-                        //    $("#car-table tbody").append(addDataTable);
-                        //};
-
                         console.log(msg);
-                        $("#txt-Make").val(msg[0].Make);
-                        $("#txt-Model").val(msg[0].Model);
-                        $("#txt-Year").val(msg[0].ProductionYear);
-                        $("#txt-Power").val(msg[0].Power);
-                        $("#txt-Quantity").val(msg[0].Quantity);
-                        $("#txt-Fuel").val(msg[0].Fuel);
+                        $("#txt-Car").val(msg[0].Make);
                     },
                     error: function () {
                         alert("Error while inserting data");
