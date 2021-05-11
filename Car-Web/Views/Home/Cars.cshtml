@@ -6,12 +6,14 @@
         font-family: Arial;
         box-sizing: border-box;
     }
-    h2{
+    h2 {
         margin: 0px;
+        padding-top: 10px;
+        text-align: center;
     }
     .card-contianer {
-        width: 15%;
-        height: 40%;
+        width: 35%;
+        height: 60%;
         background: #FFF;
         border-radius: 6px;
         position: absolute;
@@ -22,14 +24,15 @@
         overflow: hidden;
         display: inline-block;
     }
-    .upper-container{
+    .upper-container {
         height: 20%;
-        background: #ff0000;
-
+        background: #084dba;
+        border-bottom-left-radius: 50%;
+        border-bottom-right-radius: 50%;
     }
     .lower-container{
         height: 80%;
-        background: coral;
+        background: white;
     }
 
 </style>
@@ -47,8 +50,15 @@
             <h2>Cars</h2>
         </div>
         <div class="lower-container">
-            <input type="text" id="txt-Car" />
-            <input type="button" id="btn-Car" value="Send" />
+            <table class="table table-striped" id="car-table">
+                <thead>
+
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+                <button type="button" class="btn btn-danger" id="btn-Car">Show all cars!!</button>
         </div>
 
     </div>
@@ -70,8 +80,11 @@
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     success: function (msg) {
+                        $("#car-table thead").append('<tr> <th>Car Id</th> <th>Make</th> <th>Model</th> <th>Fuel</th> <th>Power</th> <th>Production Year</th> <th>Quantity</th> <th>Select</th> </tr>')
                         console.log(msg);
-                        $("#txt-Car").val(msg[0].Make);
+                        for (var i = 0; i < msg.length; i++) {
+                            $("#car-table tbody").append('<tr> <td>' + msg[i].Id_Car + '</td> <td>' + msg[i].Make + '</td> <td>' + msg[i].Model + '</td> <td>' + msg[i].Fuel + '</td> <td>' + msg[i].Power + '</td> <td>' + msg[i].ProductionYear + '</td> <td>' + msg[i].Quantity + '</td> <td><button type="button" class="btn btn-warning">Select Car</button></td> </tr>');
+                        }
                     },
                     error: function () {
                         alert("Error while inserting data");
