@@ -1,12 +1,62 @@
-﻿@{
+﻿<style>
+    body{
+        margin: 0px;
+        padding: 0px;
+        background: #f1f1f1;
+        font-family: Arial;
+        box-sizing: border-box;
+    }
+    h2{
+        margin: 0px;
+    }
+    .card-contianer {
+        width: 15%;
+        height: 40%;
+        background: #FFF;
+        border-radius: 6px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: 0px 1px 10px 1px #000;
+        overflow: hidden;
+        display: inline-block;
+    }
+    .upper-container{
+        height: 20%;
+        background: #ff0000;
+
+    }
+    .lower-container{
+        height: 80%;
+        background: coral;
+    }
+
+</style>
+
+@{
     ViewBag.Title = "Cars";
 }
 
+
+
 <h2>Cars</h2>
 <body>
-    <input type="text" id="txt-Car" />
-    <input type="button" id="btn-Car" value="Send" />
+    <div class="card-contianer">
+        <div class="upper-container">
+            <h2>Cars</h2>
+        </div>
+        <div class="lower-container">
+            <input type="text" id="txt-Car" />
+            <input type="button" id="btn-Car" value="Send" />
+        </div>
+
+    </div>
+
+
 </body>
+
+
 @section Scripts
 {
     <script type="text/javascript">
@@ -17,7 +67,7 @@
                     type: "GET",
                     url: 'https://localhost:44352/api/cars/GetAllCars',
                     data: { keyword: zapis },
-                    dataType: "text",
+                    dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     success: function (msg) {
                         console.log(msg);

@@ -83,3 +83,7 @@ C:\Users\Legion5\Documents\GitHub\Car-Web\Car-Web\obj\Debug\Car-Web.csproj.CoreC
 C:\Users\Legion5\Documents\GitHub\Car-Web\Car-Web\obj\Debug\Car-Web.csproj.CopyComplete
 C:\Users\Legion5\Documents\GitHub\Car-Web\Car-Web\obj\Debug\Car-Web.dll
 C:\Users\Legion5\Documents\GitHub\Car-Web\Car-Web\obj\Debug\Car-Web.pdb
+C:\Users\Legion5\Documents\GitHub\Car-Web\Car-Web\bin\EntityFramework.dll
+C:\Users\Legion5\Documents\GitHub\Car-Web\Car-Web\bin\EntityFramework.SqlServer.dll
+C:\Users\Legion5\Documents\GitHub\Car-Web\Car-Web\bin\EntityFramework.xml
+C:\Users\Legion5\Documents\GitHub\Car-Web\Car-Web\bin\EntityFramework.SqlServer.xml
