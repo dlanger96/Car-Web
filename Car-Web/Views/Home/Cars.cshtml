@@ -1,40 +1,51 @@
 ﻿<style>
-    body{
-        margin: 0px;
-        padding: 0px;
-        background: #f1f1f1;
-        font-family: Arial;
-        box-sizing: border-box;
-    }
+    @@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
+        body {
+            margin: 0px;
+            padding: 0px;
+            background: #f1f1f1;
+            font-family: Arial;
+            box-sizing: border-box;
+        }
+
     h2 {
+        font-family: 'Open Sans', sans-serif;
         margin: 0px;
         padding-top: 10px;
         text-align: center;
-    }
-    .card-contianer {
-        width: 35%;
-        height: 60%;
-        background: #FFF;
-        border-radius: 6px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        box-shadow: 0px 1px 10px 1px #000;
-        overflow: hidden;
-        display: inline-block;
-    }
-    .upper-container {
-        height: 20%;
-        background: #084dba;
-        border-bottom-left-radius: 50%;
-        border-bottom-right-radius: 50%;
-    }
-    .lower-container{
-        height: 80%;
-        background: white;
+        font-size: 40px;
+        font-weight: bolder;
     }
 
+        .card-contianer {
+            width: 35%;
+            height: 60%;
+            background: #FFF;
+            border-radius: 6px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0px 1px 10px 1px #000;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .upper-container {
+            height: 20%;
+        }
+
+        .lower-container {
+            height: 80%;
+            /*        background: rgb(255,255,255);
+            background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(2,29,103,0.6138830532212884) 71%);*/
+            background: rgb(255,255,255);
+            background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(2,29,103,0.6138830532212884) 71%, rgba(0,30,112,1) 99%);
+        }
+
+        #btn-Car {
+            margin-left: 40%;
+        }
 </style>
 
 @{
@@ -50,15 +61,15 @@
             <h2>Cars</h2>
         </div>
         <div class="lower-container">
+            <button type="button" class="btn btn-danger btn-lg" id="btn-Car">Show all cars!!</button>
             <table class="table table-striped" id="car-table">
                 <thead>
 
                 </thead>
                 <tbody>
-
                 </tbody>
             </table>
-                <button type="button" class="btn btn-danger" id="btn-Car">Show all cars!!</button>
+
         </div>
 
     </div>
@@ -80,8 +91,10 @@
                     dataType: "json",
                     contentType: "application/json; charset=utf-8",
                     success: function (msg) {
+                        $("#car-table thead").empty();
                         $("#car-table thead").append('<tr> <th>Car Id</th> <th>Make</th> <th>Model</th> <th>Fuel</th> <th>Power</th> <th>Production Year</th> <th>Quantity</th> <th>Select</th> </tr>')
                         console.log(msg);
+                        $("#car-table tbody").empty();
                         for (var i = 0; i < msg.length; i++) {
                             $("#car-table tbody").append('<tr> <td>' + msg[i].Id_Car + '</td> <td>' + msg[i].Make + '</td> <td>' + msg[i].Model + '</td> <td>' + msg[i].Fuel + '</td> <td>' + msg[i].Power + '</td> <td>' + msg[i].ProductionYear + '</td> <td>' + msg[i].Quantity + '</td> <td><button type="button" class="btn btn-warning">Select Car</button></td> </tr>');
                         }
