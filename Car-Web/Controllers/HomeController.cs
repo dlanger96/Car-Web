@@ -30,5 +30,9 @@ namespace Car_Web.Controllers
         {
             return View();
         }
+        public ActionResult CreateCars()
+        {
+            return View();
+        }
     }
 }

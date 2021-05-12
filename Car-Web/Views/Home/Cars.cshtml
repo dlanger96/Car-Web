@@ -1,12 +1,14 @@
-﻿<style>
+﻿@model Car_Web.Models.Car
+<style>
     @@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
-        body {
-            margin: 0px;
-            padding: 0px;
-            background: #f1f1f1;
-            font-family: Arial;
-            box-sizing: border-box;
-        }
+
+    body {
+        margin: 0px;
+        padding: 0px;
+        background: #f1f1f1;
+        font-family: Arial;
+        box-sizing: border-box;
+    }
 
     h2 {
         font-family: 'Open Sans', sans-serif;
@@ -17,35 +19,43 @@
         font-weight: bolder;
     }
 
-        .card-contianer {
-            width: 35%;
-            height: 60%;
-            background: #FFF;
-            border-radius: 6px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            box-shadow: 0px 1px 10px 1px #000;
-            overflow: hidden;
-            display: inline-block;
-        }
+    .card-contianer {
+        width: 35%;
+        height: 60%;
+        background: #FFF;
+        border-radius: 20px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: 0px 1px 10px 1px #000;
+        overflow: hidden;
+        display: inline-block;
+    }
 
-        .upper-container {
-            height: 20%;
-        }
+    .upper-container {
+        height: 20%;
+    }
 
-        .lower-container {
-            height: 80%;
-            /*        background: rgb(255,255,255);
+    .lower-container {
+        height: 80%;
+        /*        background: rgb(255,255,255);
             background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(2,29,103,0.6138830532212884) 71%);*/
-            background: rgb(255,255,255);
-            background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(2,29,103,0.6138830532212884) 71%, rgba(0,30,112,1) 99%);
-        }
+        background: rgb(255,255,255);
+        background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(2,29,103,0.6138830532212884) 71%, rgba(0,30,112,1) 99%);
+    }
 
-        #btn-Car {
-            margin-left: 40%;
-        }
+    #btn-Car, #btn-Add-Car  {
+        margin-left: 20%;
+        margin-bottom: 3%;
+    }
+    #new-car-body {
+        background: rgb(255,255,255);
+        background: -moz-linear-gradient(180deg, rgba(255,255,255,0.1516981792717087) 0%, rgba(9,9,121,0.19931722689075626) 98%);
+        background: -webkit-linear-gradient(180deg, rgba(255,255,255,0.1516981792717087) 0%, rgba(9,9,121,0.19931722689075626) 98%);
+        background: linear-gradient(180deg, rgba(255,255,255,0.1516981792717087) 0%, rgba(9,9,121,0.19931722689075626) 98%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#090979",GradientType=1);
+    }
 </style>
 
 @{
@@ -62,6 +72,7 @@
         </div>
         <div class="lower-container">
             <button type="button" class="btn btn-danger btn-lg" id="btn-Car">Show all cars!!</button>
+            <a href="#" class="btn btn-info btn-lg" id="btn-Add-Car" onclick="AddNewCar(0)">Add New Car</a>  
             <table class="table table-striped" id="car-table">
                 <thead>
 
@@ -69,9 +80,49 @@
                 <tbody>
                 </tbody>
             </table>
+            <p id="p-link">
+                @Html.ActionLink("Edit", "Edit") |
+                @Html.ActionLink("Back to List", "Index")
+            </p>
 
         </div>
 
+    </div>
+
+    <div class="modal fade" id="MyModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" id="new-car-header">
+                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+                    <h2 id="ModalTitle"></h2>
+                </div>
+                <div class="modal-body" id="new-car-body">
+                    <form id="form">
+                        <fieldset id="SubmitForm">
+                            @Html.HiddenFor(m => m.Id_Car, new { @id = "IdCar" })
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.Make, new { @id = "CarMake", @class = "form-group", @placeholder = "Make*" })
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.Model, new { @id = "CarModel", @class = "form-group", @placeholder = "Model*" })
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.Fuel, new { @id = "CarFuel", @class = "form-group", @placeholder = "Fuel*" })
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.Power, new { @id = "CarPower", @class = "form-group", @placeholder = "Power*" })
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.Quantity, new { @id = "CarQuantity", @class = "form-group", @placeholder = "Quantity*" })
+                            </div>
+                            <div class="form-greoup">
+                                <a href="#" class="btn btn-block btn-danger" id="SaveCarRecord">Save</a>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
 
@@ -106,5 +157,11 @@
                 return false;
             });
         });
+
+        function AddNewCar(Carid) {
+            $("#form")[0].reset();
+            $("#ModalTitle").html("Add NEW Car");
+            $("#MyModal").modal();
+        }
     </script>
 }
