@@ -20,7 +20,7 @@
     }
 
     .card-contianer {
-        width: 35%;
+        width: 45%;
         height: 60%;
         background: #FFF;
         border-radius: 20px;
@@ -101,19 +101,22 @@
                         <fieldset id="SubmitForm">
                             @Html.HiddenFor(m => m.Id_Car, new { @id = "IdCar" })
                             <div class="form-group">
-                                @Html.TextBoxFor(m => m.Make, new { @id = "CarMake", @class = "form-group", @placeholder = "Make*" })
+                                @Html.TextBoxFor(m => m.Make, new { @id = "CarMake", @class = "form-group", @placeholder = "Make" })
                             </div>
                             <div class="form-group">
-                                @Html.TextBoxFor(m => m.Model, new { @id = "CarModel", @class = "form-group", @placeholder = "Model*" })
+                                @Html.TextBoxFor(m => m.Model, new { @id = "CarModel", @class = "form-group", @placeholder = "Model" })
                             </div>
                             <div class="form-group">
-                                @Html.TextBoxFor(m => m.Fuel, new { @id = "CarFuel", @class = "form-group", @placeholder = "Fuel*" })
+                                @Html.TextBoxFor(m => m.Fuel, new { @id = "CarFuel", @class = "form-group", @placeholder = "Fuel" })
                             </div>
                             <div class="form-group">
-                                @Html.TextBoxFor(m => m.Power, new { @id = "CarPower", @class = "form-group", @placeholder = "Power*" })
+                                @Html.TextBoxFor(m => m.Power, new { @id = "CarPower", @class = "form-group", @placeholder = "Power" })
                             </div>
                             <div class="form-group">
-                                @Html.TextBoxFor(m => m.Quantity, new { @id = "CarQuantity", @class = "form-group", @placeholder = "Quantity*" })
+                                @Html.TextBoxFor(m => m.Quantity, new { @id = "CarQuantity", @class = "form-group", @placeholder = "Quantity" })
+                            </div>
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.Production_Year, new { @id = "CarProductionYear", @class = "form-group", @placeholder = "Production Year" })
                             </div>
                             <div class="form-greoup">
                                 <a href="#" class="btn btn-block btn-danger" id="SaveCarRecord">Save</a>
@@ -147,7 +150,7 @@
                         console.log(msg);
                         $("#car-table tbody").empty();
                         for (var i = 0; i < msg.length; i++) {
-                            $("#car-table tbody").append('<tr> <td>' + msg[i].Id_Car + '</td> <td>' + msg[i].Make + '</td> <td>' + msg[i].Model + '</td> <td>' + msg[i].Fuel + '</td> <td>' + msg[i].Power + '</td> <td>' + msg[i].ProductionYear + '</td> <td>' + msg[i].Quantity + '</td> <td><button type="button" class="btn btn-warning">Select Car</button></td> </tr>');
+                            $("#car-table tbody").append('<tr> <td>' + msg[i].Id_Car + '</td> <td>' + msg[i].Make + '</td> <td>' + msg[i].Model + '</td> <td>' + msg[i].Fuel + '</td> <td>' + msg[i].Power + '</td> <td>' + msg[i].ProductionYear + '</td> <td>' + msg[i].Quantity + '</td> <td><button type="button" class="btn btn-warning" onclick="EditCarRecord('+ msg[i].Id_Car +')">Select Car</button></td> </tr>');
                         }
                     },
                     error: function () {
@@ -162,6 +165,35 @@
             $("#form")[0].reset();
             $("#ModalTitle").html("Add NEW Car");
             $("#MyModal").modal();
-        }
+        };
+
+        function EditCarRecord(Selectedid) {
+            $("#form")[0].reset();
+            $("#ModalTitle").html("Eddit selected Car: "+ Selectedid +" ");
+            $("#MyModal").modal();
+            $.ajax({
+                type: "GET",
+                url: 'https://localhost:44352/api/cars/GetSelectedCar',
+                data: { selectedId: Selectedid },
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (car) {
+                    console.log(car);
+                    for (var i = 0; i < car.length; i++) {
+                        $("#IdCar").val(car[i].Id_Car);
+                        $("#CarMake").val(car[i].Make);
+                        $("#CarModel").val(car[i].Model);
+                        $("#CarFuel").val(car[i].Fuel);
+                        $("#CarPower").val(car[i].Power);
+                        $("#CarQuantity").val(car[i].Quantity);
+                        $("#CarProductionYear").val(car[i].ProductionYear);
+                    }
+                },
+                error: function () {
+                    alert("Error while inserting data");
+                }
+            });
+
+        };
     </script>
 }
