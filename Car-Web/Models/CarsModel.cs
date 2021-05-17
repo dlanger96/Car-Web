@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Car_Web.Models
 {
@@ -14,6 +15,7 @@ namespace Car_Web.Models
         public string Power { get; set; }
         public int ProductionYear { get; set; }
         public int Quantity { get; set; }
+        public List<SelectListItem> ListOfFuels { get; set; }
 
     }
 }
