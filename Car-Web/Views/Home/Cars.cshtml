@@ -193,7 +193,7 @@
                     }
                 },
                 error: function () {
-                    alert("Error while inserting data");
+                    alert("Error while showing data");
                 }
             });
 
@@ -203,9 +203,16 @@
             var data = $("#SubmitForm").serialize();
             $.ajax({
                 type: "Post",
-                url: "",
+                url: "https://localhost:44352/api/cars/SaveCar",
                 data: data,
+                dataType: "json",
+                success: function (result) {
+                    alert("Success!");
 
+                },
+                error: function () {
+                    alert("Error while inserting data!");
+                }
             })
         })
     </script>

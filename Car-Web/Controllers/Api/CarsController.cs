@@ -71,6 +71,7 @@ namespace Car_Web.Controllers.Api
         [HttpPost]
         public IHttpActionResult SaveCar(CarsModel selectedCar)
         {
+            
                 try
                 {
                 
@@ -92,11 +93,14 @@ namespace Car_Web.Controllers.Api
                     }
                     else
                     {
+                        int selectedFuel = int.Parse(selectedCar.Fuel);
+                        int selectedMake = int.Parse(selectedCar.Make);
+                        int selectedModel = int.Parse(selectedCar.Model);
                         Car currentCar = new Car();
                         //currentCar.Id_Car = int.Parse(entities.Cars.Where(c => selectedCar.Id_Car == c.Id_Car).Select(c => c.Id_Car).FirstOrDefault().ToString());
-                        currentCar.Fuel = int.Parse(entities.Fuels.Where(c => selectedCar.Fuel == c.Name).Select(c => c.Id_Fuel).FirstOrDefault().ToString());
-                        currentCar.Make = entities.Makes.Where(c => selectedCar.Make == c.Name).Select(c => c.Id_Make).FirstOrDefault();
-                        currentCar.Model = entities.Models.Where(c => selectedCar.Model == c.Name).Select(c => c.Id_Model).FirstOrDefault();
+                        currentCar.Fuel = entities.Fuels.Where(c => selectedFuel == c.Id_Fuel).Select(c => c.Id_Fuel).FirstOrDefault();
+                        currentCar.Make = entities.Makes.Where(c => selectedMake == c.Id_Make).Select(c => c.Id_Make).FirstOrDefault();
+                        currentCar.Model = entities.Models.Where(c => selectedModel == c.Id_Model).Select(c => c.Id_Model).FirstOrDefault();
                         currentCar.Power = selectedCar.Power;
                         currentCar.Production_Year = selectedCar.ProductionYear;
                         currentCar.Quantity = selectedCar.Quantity;
