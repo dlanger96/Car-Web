@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Car_Web.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -28,7 +29,14 @@ namespace Car_Web.Controllers
         }
         public ActionResult Cars()
         {
-            return View();
+            CarsModel carsModel = new CarsModel();
+            using (CarsEntities entities = new CarsEntities())
+            {
+                carsModel.ListOfFuels = entities.Fuels.ToList();
+                carsModel.ListOfMakes = entities.Makes.ToList();
+                carsModel.ListOfModels = entities.Models.ToList();
+            }
+            return View(carsModel);
         }
         public ActionResult CreateCars()
         {

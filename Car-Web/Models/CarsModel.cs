@@ -15,7 +15,10 @@ namespace Car_Web.Models
         public string Power { get; set; }
         public int ProductionYear { get; set; }
         public int Quantity { get; set; }
-        public List<SelectListItem> ListOfFuels { get; set; }
+        public List<Fuel> ListOfFuels { get; set; }
+        public List<Model> ListOfModels { get; set; }
+        public List<Make> ListOfMakes { get; set; }
+
 
     }
 }

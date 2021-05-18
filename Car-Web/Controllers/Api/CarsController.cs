@@ -77,6 +77,7 @@ namespace Car_Web.Controllers.Api
                 
                 using (CarsEntities entities = new CarsEntities())
                 {
+
                     if (selectedCar.Id_Car > 0)
                     {
                         Car carForEdit = entities.Cars.Where(c => selectedCar.Id_Car == c.Id_Car).FirstOrDefault();
@@ -93,13 +94,13 @@ namespace Car_Web.Controllers.Api
                     }
                     else
                     {
-                        int selectedFuel = int.Parse(selectedCar.Fuel);
-                        int selectedMake = int.Parse(selectedCar.Make);
+                        string selectedFuel = selectedCar.Fuel.ToString();
+                        string selectedMake = selectedCar.Make.ToString();
                         int selectedModel = int.Parse(selectedCar.Model);
                         Car currentCar = new Car();
                         //currentCar.Id_Car = int.Parse(entities.Cars.Where(c => selectedCar.Id_Car == c.Id_Car).Select(c => c.Id_Car).FirstOrDefault().ToString());
-                        currentCar.Fuel = entities.Fuels.Where(c => selectedFuel == c.Id_Fuel).Select(c => c.Id_Fuel).FirstOrDefault();
-                        currentCar.Make = entities.Makes.Where(c => selectedMake == c.Id_Make).Select(c => c.Id_Make).FirstOrDefault();
+                        currentCar.Fuel = entities.Fuels.Where(c => selectedFuel == c.Name).Select(c => c.Id_Fuel).FirstOrDefault();
+                        currentCar.Make = entities.Makes.Where(c => selectedMake == c.Name).Select(c => c.Id_Make).FirstOrDefault();
                         currentCar.Model = entities.Models.Where(c => selectedModel == c.Id_Model).Select(c => c.Id_Model).FirstOrDefault();
                         currentCar.Power = selectedCar.Power;
                         currentCar.Production_Year = selectedCar.ProductionYear;
@@ -115,7 +116,7 @@ namespace Car_Web.Controllers.Api
 
                     throw ex;
                 }
-            return Ok();
+            return Ok("Data Saved");
 
         }
 
